@@ -1181,6 +1181,102 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .session-followup-modal {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 22px;
+      background: rgba(9, 24, 43, 0.62);
+      z-index: 2000;
+    }
+
+    .session-followup-modal.is-open {
+      display: flex;
+    }
+
+    .session-followup-dialog {
+      position: relative;
+      width: min(920px, 100%);
+      max-height: 88vh;
+      overflow: auto;
+      border-radius: 28px;
+      background: #ffffff;
+      box-shadow: 0 28px 90px rgba(9, 24, 43, 0.28);
+      padding: 26px;
+    }
+
+    .session-followup-close {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 42px;
+      height: 42px;
+      border: 1px solid #dce3ec;
+      border-radius: 999px;
+      background: #fff;
+      color: #162235;
+      font-size: 20px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .session-followup-status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-height: 280px;
+      gap: 14px;
+      padding: 36px 20px;
+    }
+
+    .session-followup-spinner {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      border: 4px solid #e3e9f2;
+      border-top-color: #d1ad58;
+      animation: sessionSpin 0.9s linear infinite;
+    }
+
+    @keyframes sessionSpin {
+      to { transform: rotate(360deg); }
+    }
+
+    .session-followup-status h3 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.2;
+      color: #162235;
+    }
+
+    .session-followup-status p {
+      margin: 0;
+      max-width: 560px;
+      color: #667085;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+
+    .session-followup-body {
+      display: none;
+      padding-top: 10px;
+    }
+
+    .session-followup-body.is-visible {
+      display: block;
+    }
+
+    .session-followup-dialog .session-note-box {
+      margin-top: 0;
+    }
+
     .session-note-box {
       margin-top: 12px;
       padding: 18px 20px;
@@ -2805,7 +2901,7 @@
             </button>
             <div class="faq-answer">
               <div class="faq-answer-inner">
-                <div class="faq-copy">Ön değerlendirme ve süreç bilgilendirmesi SESSION CHAT iletişim kanalları üzerinden yürütülür,bu yüzden Başvuru yaptıktan sonra mutlaka size verilecek yönlendirme bilgileri ile SESSION uygulamasını indirip mesaj yollayın. Gerektiğinde özel durumlar için ek yönlendirme ve detaylı danışmanlık desteği de sağlanır.</div>
+                <div class="faq-copy">Ön değerlendirme ve süreç bilgilendirmesi SESSION CHAT iletişim kanalları üzerinden yürütülür,bu yüzden Başvuru yaparken mutlaka size ulaşılabilecek SESSION CHAT kullanıcı adınızı belirtiniz. Gerektiğinde özel durumlar için ek yönlendirme ve detaylı danışmanlık desteği de sağlanır.</div>
               </div>
             </div>
           </div>
@@ -2932,37 +3028,7 @@
 
                 <div>
                   <label class="form-label" for="ekNot">Ek Not</label>
-                  <textarea id="ekNot" name="ek_not" placeholder="Lütfen tüm bilgileri eksiksiz ve doğru doldurduğunuzdan emin olun, Ek mesaj yazmak isterseniz bu alanı kullanabilirsiniz."></textarea>
-                  <div class="session-note-box">Tüm iletişim süreçleri yalnızca Session Chat üzerinden yürütülmektedir. Bizimle bağlantı kurabilmek için öncelikle Session uygulamasını cihazınıza indirmeniz ve kurulum işlemini tamamlamanız gerekmektedir. Ardından başvuru formu sonrası size verilen Session iletişim ID adresi üzerinden mesaj göndererek iletişime geçebilirsiniz. Session uygulaması Android, iPhone/iOS ve Desktop cihazlar için resmî indirme sayfası üzerinden edinilebilir.
-                    <div class="session-note-links">
-                      <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Android</a>
-                      <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">iPhone / iOS</a>
-                      <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Desktop</a>
-                    </div>
-                  </div>
-
-                  <div class="session-flow-bridge">
-                    <span class="session-flow-step">1. Session’ı indirin</span>
-                    <span class="session-flow-arrow">↓</span>
-                    <span class="session-flow-step">2. Ardından aşağıdaki Session ID üzerinden mesaj gönderin</span>
-                  </div>
-
-                  <div class="session-contact-card">
-                    <h4>Session iletişim alanı</h4>
-                    <p>Bu blok, Session’ı web sitene eklenmiş şekilde gösterir. Kendi Session ID bilgin geldiğinde aşağıdaki alanı gerçek hesabınla değiştirebilirsin.</p>
-                    <ol class="session-steps">
-                      <li>Session uygulamasını indirip kurun.</li>
-                      <li>Aşağıdaki Session ID bilgisini kopyalayın.</li>
-                      <li>Uygulama içinden yeni sohbet başlatıp bu ID üzerinden mesaj gönderin.</li>
-                    </ol>
-                    <div class="session-id-row">
-                      <div class="session-id-box" id="sessionIdValue"> 05e4017c4cfba704a96eb30ea7d8bae15ced583cd51326814aec5b26312d4ff760 </div>
-                      <button type="button" class="session-action-btn" id="copySessionIdBtn">Session ID Kopyala</button>
-                    </div>
-                    <div class="session-copy-feedback" id="sessionCopyFeedback">Not: Şu anda örnek alan eklendi. Kendi Session ID bilgin girildiğinde doğrudan kullanılabilir.</div>
-                  </div>
-                </div>
-
+                  <textarea id="ekNot" name="ek_not" placeholder="Lütfen SESSION CHAT üzerinden ulaşılacak kullanıcı adını belirtin, aksi takdirde iletişim kurulamayacaktır."></textarea>
                 <div class="checkbox-card">
                   <input type="checkbox" id="onayDurumu" name="onay_durumu" value="Kabul edildi" required>
                   <label for="onayDurumu">Kurumun internet sitesinde kapıda ödeme seçeneğinin bulunmadığını, resmî e-Devlet kayıt işlemlerinin başlatılabilmesi için ödemenin belirtilen hesap türüne ve tutarına uygun olarak tam ve eksiksiz yapılmasının zorunlu olduğunu, işlemler tamamlandıktan sonra toplu ödeme yapılmasına yönelik bir alternatifin kesinlikle mevcut olmadığını ve süreci başlatılan işlemler için herhangi bir ücret iadesi yapılmayacağını okuduğumu, anladığımı ve tüm bu şartları gayrikabili rücu kabul ettiğimi beyan ve taahhüt ederim.</label>
@@ -2995,6 +3061,49 @@
       </div>
     </div>
   </footer>
+  <div class="session-followup-modal" id="sessionFollowupModal" aria-hidden="true">
+    <div class="session-followup-dialog" role="dialog" aria-modal="true" aria-labelledby="sessionFollowupTitle">
+      <button type="button" class="session-followup-close" id="sessionFollowupClose" aria-label="Kapat">×</button>
+
+      <div class="session-followup-status" id="sessionFollowupStatus">
+        <div class="session-followup-spinner" aria-hidden="true"></div>
+        <h3 id="sessionFollowupTitle">Lütfen bekleyiniz</h3>
+        <p>İletişim kanalı bilgileri yükleniyor. Başvurunuz alındıktan sonra Session yönlendirme adımları birkaç saniye içinde görüntülenecektir.</p>
+      </div>
+
+      <div class="session-followup-body" id="sessionFollowupBody">
+        <div class="session-note-box">Tüm iletişim süreçleri yalnızca Session Chat üzerinden yürütülmektedir. Bizimle bağlantı kurabilmek için öncelikle Session uygulamasını cihazınıza indirmeniz ve kurulum işlemini tamamlamanız gerekmektedir. Ardından web sitemizde yer alan Session iletişim adresi üzerinden mesaj göndererek iletişime geçebilirsiniz. Session uygulaması Android, iPhone/iOS ve Desktop cihazlar için resmî indirme sayfası üzerinden edinilebilir.
+          <div class="session-note-links">
+            <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Android</a>
+            <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">iPhone / iOS</a>
+            <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Desktop</a>
+          </div>
+        </div>
+
+        <div class="session-flow-bridge">
+          <span class="session-flow-step">1. Session’ı indirin</span>
+          <span class="session-flow-arrow">↓</span>
+          <span class="session-flow-step">2. Ardından aşağıdaki Session ID üzerinden mesaj gönderin</span>
+        </div>
+
+        <div class="session-contact-card">
+          <h4>Session iletişim alanı</h4>
+          <p>Bu blok, Session’ı web sitene eklenmiş şekilde gösterir. Kendi Session ID bilgin geldiğinde aşağıdaki alanı gerçek hesabınla değiştirebilirsin.</p>
+          <ol class="session-steps">
+            <li>Session uygulamasını indirip kurun.</li>
+            <li>Aşağıdaki Session ID bilgisini kopyalayın.</li>
+            <li>Uygulama içinden yeni sohbet başlatıp bu ID üzerinden mesaj gönderin.</li>
+          </ol>
+          <div class="session-id-row">
+            <div class="session-id-box" id="sessionIdValueModal">BURAYA-KENDI-SESSION-ID-BILGIN-GELECEK</div>
+            <button type="button" class="session-action-btn" id="copySessionIdBtnModal">Session ID Kopyala</button>
+          </div>
+          <div class="session-copy-feedback" id="sessionCopyFeedbackModal">Not: Şu anda örnek alan eklendi. Kendi Session ID bilgin girildiğinde doğrudan kullanılabilir.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     (function () {
       const gallery = document.getElementById('referencesGallery');
@@ -3122,6 +3231,14 @@
       const gunSelect = document.getElementById('dogumGunu');
       const yilSelect = document.getElementById('dogumYili');
       const mezuniyetSelect = document.getElementById('mezuniyetYili');
+      const sessionFollowupModal = document.getElementById('sessionFollowupModal');
+      const sessionFollowupClose = document.getElementById('sessionFollowupClose');
+      const sessionFollowupStatus = document.getElementById('sessionFollowupStatus');
+      const sessionFollowupBody = document.getElementById('sessionFollowupBody');
+      const sessionIdValueModal = document.getElementById('sessionIdValueModal');
+      const copySessionIdBtnModal = document.getElementById('copySessionIdBtnModal');
+      const sessionCopyFeedbackModal = document.getElementById('sessionCopyFeedbackModal');
+      let sessionFollowupTimer = null;
       if (!form || !submitButton || !message) return;
 
       if (gunSelect && gunSelect.options.length === 1) {
@@ -3149,6 +3266,38 @@
           option.value = String(year);
           option.textContent = String(year);
           mezuniyetSelect.appendChild(option);
+        }
+      }
+
+      function openSessionFollowupModal() {
+        if (!sessionFollowupModal || !sessionFollowupStatus || !sessionFollowupBody) return;
+        sessionFollowupModal.classList.add('is-open');
+        sessionFollowupModal.setAttribute('aria-hidden', 'false');
+        sessionFollowupStatus.style.display = 'flex';
+        sessionFollowupBody.classList.remove('is-visible');
+        document.body.style.overflow = 'hidden';
+
+        if (sessionFollowupTimer) {
+          clearTimeout(sessionFollowupTimer);
+        }
+
+        sessionFollowupTimer = window.setTimeout(function () {
+          sessionFollowupStatus.style.display = 'none';
+          sessionFollowupBody.classList.add('is-visible');
+        }, 1400);
+      }
+
+      function closeSessionFollowupModal() {
+        if (!sessionFollowupModal || !sessionFollowupStatus || !sessionFollowupBody) return;
+        sessionFollowupModal.classList.remove('is-open');
+        sessionFollowupModal.setAttribute('aria-hidden', 'true');
+        sessionFollowupStatus.style.display = 'flex';
+        sessionFollowupBody.classList.remove('is-visible');
+        document.body.style.overflow = '';
+
+        if (sessionFollowupTimer) {
+          clearTimeout(sessionFollowupTimer);
+          sessionFollowupTimer = null;
         }
       }
 
@@ -3239,6 +3388,40 @@
           isValid: true,
           message: ''
         };
+      }
+
+      if (sessionFollowupClose) {
+        sessionFollowupClose.addEventListener('click', closeSessionFollowupModal);
+      }
+
+      if (copySessionIdBtnModal && sessionIdValueModal) {
+        copySessionIdBtnModal.addEventListener('click', async function () {
+          const sessionText = sessionIdValueModal.textContent.trim();
+
+          try {
+            if (navigator.clipboard && window.isSecureContext) {
+              await navigator.clipboard.writeText(sessionText);
+            } else {
+              const tempInput = document.createElement('textarea');
+              tempInput.value = sessionText;
+              tempInput.style.position = 'fixed';
+              tempInput.style.left = '-9999px';
+              document.body.appendChild(tempInput);
+              tempInput.focus();
+              tempInput.select();
+              document.execCommand('copy');
+              document.body.removeChild(tempInput);
+            }
+
+            if (sessionCopyFeedbackModal) {
+              sessionCopyFeedbackModal.textContent = 'Session ID kopyalandı. Uygulama içinden yeni sohbet başlatıp bu ID ile mesaj gönderebilirsiniz.';
+            }
+          } catch (error) {
+            if (sessionCopyFeedbackModal) {
+              sessionCopyFeedbackModal.textContent = 'Kopyalama işlemi yapılamadı. Session ID alanını manuel olarak kopyalayabilirsiniz.';
+            }
+          }
+        });
       }
 
       if (tcKimlikInput) {
@@ -3389,7 +3572,8 @@
 
           form.reset();
           tcKimlikHataTemizle();
-          message.textContent = 'Başvurunuz alındı. En kısa sürede sizinle iletişime geçilecektir.';
+          message.textContent = 'Başvurunuz alındı. Session iletişim bilgileri açılıyor...';
+          openSessionFollowupModal();
         } catch (error) {
           console.error('Form gönderim hatası:', error);
           message.textContent = error && error.message
