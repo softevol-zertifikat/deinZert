@@ -1222,6 +1222,91 @@
       border-color: #d8c36a;
     }
 
+    .session-contact-card {
+      margin-top: 14px;
+      padding: 20px;
+      border-radius: 22px;
+      background: #e9f7ec;
+      border: 1px solid #e4e9f0;
+      box-shadow: 0 10px 28px rgba(9,24,43,0.06);
+    }
+
+    .session-contact-card h4 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.2;
+      letter-spacing: -0.03em;
+      color: #162235;
+    }
+
+    .session-contact-card p {
+      margin: 0;
+      color: #667085;
+      font-size: 12.5px;
+      line-height: 1.6;
+    }
+
+    .session-steps {
+      margin: 14px 0 0;
+      padding-left: 18px;
+      color: #4b5565;
+      font-size: 12.3px;
+      line-height: 1.65;
+    }
+
+    .session-id-row {
+      display: flex;
+      align-items: stretch;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+    }
+
+    .session-id-box {
+      flex: 1 1 320px;
+      min-height: 46px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-radius: 16px;
+      background: #f7f8fb;
+      border: 1px solid #e1e6ee;
+      color: #162235;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      word-break: break-all;
+    }
+
+    .session-action-btn {
+      min-height: 46px;
+      padding: 0 16px;
+      border: 1px solid #dfe5ed;
+      border-radius: 999px;
+      background: #09182b;
+      color: #fff;
+      font-size: 11.8px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .session-action-btn.secondary {
+      background: #ffffff;
+      color: #162235;
+    }
+
+    .session-copy-feedback {
+      margin-top: 10px;
+      color: #667085;
+      font-size: 11.6px;
+      line-height: 1.5;
+    }
+
     .checkbox-card {
       display: flex;
       align-items: flex-start;
@@ -2832,6 +2917,21 @@
                       <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Desktop</a>
                     </div>
                   </div>
+
+                  <div class="session-contact-card">
+                    <h4>Session iletişim alanı</h4>
+                    <p>Bu blok, Session’ı web sitene eklenmiş şekilde gösterir. Kendi Session ID bilgin geldiğinde aşağıdaki alanı gerçek hesabınla değiştirebilirsin.</p>
+                    <ol class="session-steps">
+                      <li>Session uygulamasını indirip kurun.</li>
+                      <li>Aşağıdaki Session ID bilgisini kopyalayın.</li>
+                      <li>Uygulama içinden yeni sohbet başlatıp bu ID üzerinden mesaj gönderin.</li>
+                    </ol>
+                    <div class="session-id-row">
+                      <div class="session-id-box" id="sessionIdValue">BURAYA-KENDI-SESSION-ID-BILGIN-GELECEK</div>
+                      <button type="button" class="session-action-btn" id="copySessionIdBtn">Session ID Kopyala</button>
+                    </div>
+                    <div class="session-copy-feedback" id="sessionCopyFeedback">Not: Şu anda örnek alan eklendi. Kendi Session ID bilgin girildiğinde doğrudan kullanılabilir.</div>
+                  </div>
                 </div>
 
                 <div class="checkbox-card">
@@ -2986,6 +3086,9 @@
       const message = document.getElementById('preApplyMessage');
       const telefonInput = document.getElementById('telefonNumarasi');
       const tcKimlikInput = document.getElementById('tcKimlikNo');
+      const sessionIdValue = document.getElementById('sessionIdValue');
+      const copySessionIdBtn = document.getElementById('copySessionIdBtn');
+      const sessionCopyFeedback = document.getElementById('sessionCopyFeedback');
       const tcKimlikError = document.getElementById('tcKimlikNoError');
       const gunSelect = document.getElementById('dogumGunu');
       const yilSelect = document.getElementById('dogumYili');
@@ -3137,6 +3240,23 @@
             tcKimlikHataTemizle();
           } else {
             tcKimlikHataGoster(result.message);
+          }
+        });
+      }
+
+      if (copySessionIdBtn && sessionIdValue) {
+        copySessionIdBtn.addEventListener('click', async function () {
+          const sessionText = sessionIdValue.textContent.trim();
+
+          try {
+            await navigator.clipboard.writeText(sessionText);
+            if (sessionCopyFeedback) {
+              sessionCopyFeedback.textContent = 'Session ID kopyalandı. Uygulama içinden yeni sohbet başlatıp bu ID ile mesaj gönderebilirsiniz.';
+            }
+          } catch (error) {
+            if (sessionCopyFeedback) {
+              sessionCopyFeedback.textContent = 'Kopyalama işlemi yapılamadı. Session ID alanını manuel olarak kopyalayabilirsiniz.';
+            }
           }
         });
       }
