@@ -1181,6 +1181,47 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .session-note-box {
+      margin-top: 12px;
+      padding: 18px 20px;
+      border-radius: 20px;
+      background: #fff8d9;
+      border: 1px solid #f0e2a0;
+      color: #5a4b12;
+      font-size: 12.4px;
+      line-height: 1.65;
+      letter-spacing: -0.01em;
+    }
+
+    .session-note-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .session-note-links a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 14px;
+      border-radius: 999px;
+      background: #ffffff;
+      border: 1px solid #eadb93;
+      color: #5a4b12;
+      font-size: 11.6px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+
+    .session-note-links a:hover,
+    .session-note-links a:focus-visible {
+      background: #fff2b8;
+      border-color: #d8c36a;
+    }
+
     .checkbox-card {
       display: flex;
       align-items: flex-start;
@@ -1189,7 +1230,7 @@
       border-radius: 20px;
       background: #f7f8fb;
       border: 1px solid #e3e7ef;
-      margin-top: 6px;
+      margin-top: 14px;
     }
 
     .checkbox-card input[type="checkbox"] {
@@ -2784,6 +2825,13 @@
                 <div>
                   <label class="form-label" for="ekNot">Ek Not</label>
                   <textarea id="ekNot" name="ek_not" placeholder="Lütfen SESSION CHAT üzerinden ulaşılacak kullanıcı adını belirtin, aksi takdirde iletişim kurulamayacaktır."></textarea>
+                  <div class="session-note-box">Tüm iletişim süreçleri yalnızca Session Chat üzerinden yürütülmektedir. Bizimle bağlantı kurabilmek için öncelikle Session uygulamasını cihazınıza indirmeniz ve kurulum işlemini tamamlamanız gerekmektedir. Ardından web sitemizde yer alan Session iletişim adresi üzerinden mesaj göndererek iletişime geçebilirsiniz. Session uygulaması Android, iPhone/iOS ve Desktop cihazlar için resmî indirme sayfası üzerinden edinilebilir.
+                    <div class="session-note-links">
+                      <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Android</a>
+                      <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">iPhone / iOS</a>
+                      <a href="https://getsession.org/download" target="_blank" rel="noopener noreferrer">Desktop</a>
+                    </div>
+                  </div>
                 </div>
 
                 <div class="checkbox-card">
